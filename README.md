@@ -1,4 +1,8 @@
-# GOV.UK Notify Python client
+# Canada.ca Notify Python client
+
+Pleaes note, this project is wholely derived from the original client for GOV.UK
+
+
 
 Use this client to send emails, text messages and letters using the [GOV.UK Notify](https://www.notifications.service.gov.uk) API.
 

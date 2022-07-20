@@ -1,9 +1,9 @@
 import json
 import logging
 import time
-import urllib.parse
-
 import requests
+import urllib.parse
+import urllib3
 
 from notifications_python_client import __version__
 from notifications_python_client.authentication import create_jwt_token
@@ -16,7 +16,7 @@ class BaseAPIClient(object):
     def __init__(
             self,
             api_key,
-            base_url='https://api.notifications.service.gov.uk',
+            base_url='https://api.notification.canada.ca',
             timeout=30
     ):
         """
@@ -29,6 +29,8 @@ class BaseAPIClient(object):
         """
         service_id = api_key[-73:-37]
         api_key = api_key[-36:]
+
+        urllib3.disable_warnings()
 
         assert base_url, "Missing base url"
         assert service_id, "Missing service ID"
@@ -101,6 +103,7 @@ class BaseAPIClient(object):
             response = requests.request(
                 method,
                 url,
+                verify=False,
                 **kwargs
             )
             response.raise_for_status()
